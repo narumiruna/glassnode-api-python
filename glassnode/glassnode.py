@@ -2,32 +2,16 @@ import json
 import os
 from dataclasses import dataclass
 from datetime import datetime
-from enum import Enum
 
 import requests
 from requests.utils import default_headers
 
+from .enums import Format
+from .enums import FrequencyInterval
+from .enums import TimestampFormat
 from .errors import ResolutionForbidden
 
 ENDPOINT = "https://api.glassnode.com"
-
-
-class FrequencyInterval(Enum):
-    TEN_MINUTES = '10m'
-    ONE_HOUR = "1h"
-    ONE_DAY = "24h"
-    ONE_WEEK = "1w"
-    ONE_MONTH = '1month'
-
-
-class Format(Enum):
-    JSON = 'json'
-    CSV = 'csv'
-
-
-class TimestampFormat(Enum):
-    UNIX = 'unix'
-    HUMANIZED = 'humanized'  # RFC 3339
 
 
 @dataclass
