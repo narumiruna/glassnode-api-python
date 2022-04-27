@@ -10,6 +10,7 @@ from .enums import Format
 from .enums import FrequencyInterval
 from .enums import TimestampFormat
 from .errors import ResolutionForbidden
+from .utils import to_timestamp
 
 ENDPOINT = "https://api.glassnode.com"
 
@@ -26,8 +27,8 @@ class Parameters:
     def to_dict(self) -> dict:
         return dict(
             a=self.asset,
-            s=int(self.since.timestamp() * 1000),
-            u=int(self.until.timestamp() * 1000),
+            s=to_timestamp(self.since),
+            u=to_timestamp(self.until),
             i=self.frequency_interval.value,
             f=self.format.value,
             timestamp_format=self.timestamp_format.value,
@@ -52,3 +53,8 @@ class Glassnode(object):
             raise ResolutionForbidden(res.text)
 
         return json.loads(res.text)
+
+    @classmethod
+    def from_env(cls):
+        api_key = os.environ.get("GLASSNODE_API_KEY")
+        return cls(api_key)
