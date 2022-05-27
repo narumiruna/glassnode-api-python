@@ -1,4 +1,4 @@
-from glassnode import Glassnode
+from glassnodeapi import Glassnode
 
 
 def test_glassnode():
