@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "glassnode"
+name = "glassnodeapi"
 version = "0.1.0"
 description = ""
 authors = ["なるみ <weaper@gmail.com>"]
