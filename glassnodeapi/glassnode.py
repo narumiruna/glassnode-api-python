@@ -23,6 +23,8 @@ class Parameters:
     until: datetime = None
     frequency_interval: FrequencyInterval = None
     format: Format = None
+    currency: str = None
+    exchange: str = None
     timestamp_format: TimestampFormat = None
 
     def to_dict(self) -> dict:
@@ -39,6 +41,12 @@ class Parameters:
 
         if self.format is not None:
             params['f'] = self.format.value
+
+        if self.currency is not None:
+            params['c'] = self.currency
+
+        if self.exchange is not None:
+            params['e'] = self.exchange
 
         if self.timestamp_format is not None:
             params['timestamp_format'] = self.timestamp_format.value
@@ -81,6 +89,8 @@ class Glassnode(object):
             until: Union[str, datetime] = None,
             frequency_interval: str = None,
             format: str = None,
+            currency: str = None,
+            exchange: str = None,
             timestamp_format: str = None) -> pd.Series:
 
         if isinstance(since, str):
@@ -103,6 +113,8 @@ class Glassnode(object):
                             until=until,
                             frequency_interval=frequency_interval,
                             format=format,
+                            currency=currency,
+                            exchange=exchange,
                             timestamp_format=timestamp_format)
 
         return self._get(category, metric, params)
