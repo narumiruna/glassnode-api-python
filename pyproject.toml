@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "glassnodeapi"
-version = "0.1.1"
+version = "0.1.2"
 description = ""
 authors = ["なるみ <toucans-cutouts0f@icloud.com>"]
 
