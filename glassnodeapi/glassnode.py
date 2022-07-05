@@ -26,9 +26,8 @@ def flatten_options(d: dict) -> dict:
 
 def convert_to_dataframe(data) -> pd.DataFrame:
     df = pd.DataFrame(data)
-    df = df.set_index('t')
-    df.index = pd.to_datetime(df.index, unit='s')
-    df = df.sort_index()
+    df['t'] = pd.to_datetime(df['t'], unit='s')
+    df = df.sort_values('t')
     return df
 
 
@@ -99,7 +98,7 @@ class Glassnode(object):
             format: str = None,
             currency: str = None,
             exchange: str = None,
-            timestamp_format: str = None) -> pd.DataFrame:
+            timestamp_format: str = None) -> dict:
 
         if isinstance(since, str):
             since = iso8601.parse_date(since)
@@ -125,12 +124,7 @@ class Glassnode(object):
                             exchange=exchange,
                             timestamp_format=timestamp_format)
 
-        data = self._get(category, metric, params)
-        data = map(flatten_options, data)
-        df = convert_to_dataframe(data)
-        df.columns = [f'{category}_{metric}_{col}' for col in df.columns]
-
-        return df
+        return self._get(category, metric, params)
 
     @classmethod
     def from_env(cls):
