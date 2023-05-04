@@ -8,7 +8,7 @@ authors = ["なるみ <toucans-cutouts0f@icloud.com>"]
 python = "^3.8"
 requests = "^2.27.1"
 pandas = "^1.4.2"
-iso8601 = "^1.0.2"
+iso8601 = "^1.1.0"
 
 [tool.poetry.dev-dependencies]
 yapf = "^0.32.0"
