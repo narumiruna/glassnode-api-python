@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class FrequencyInterval(Enum):
+class FrequencyInterval(str, Enum):
     TEN_MINUTES = "10m"
     ONE_HOUR = "1h"
     ONE_DAY = "24h"
@@ -9,11 +9,11 @@ class FrequencyInterval(Enum):
     ONE_MONTH = "1month"
 
 
-class Format(Enum):
+class Format(str, Enum):
     JSON = "json"
     CSV = "csv"
 
 
-class TimestampFormat(Enum):
+class TimestampFormat(str, Enum):
     UNIX = "unix"
     HUMANIZED = "humanized"  # RFC 3339

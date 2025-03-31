@@ -2,6 +2,7 @@ import json
 import os
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any
 
 import httpx
 import iso8601
@@ -34,16 +35,16 @@ def convert_to_dataframe(data) -> pd.DataFrame:
 @dataclass
 class Parameters:
     asset: str
-    since: datetime = None
-    until: datetime = None
-    frequency_interval: FrequencyInterval = None
-    format: Format = None
-    currency: str = None
-    exchange: str = None
-    timestamp_format: TimestampFormat = None
+    since: datetime | None = None
+    until: datetime | None = None
+    frequency_interval: FrequencyInterval | None = None
+    format: Format | None = None
+    currency: str | None = None
+    exchange: str | None = None
+    timestamp_format: TimestampFormat | None = None
 
     def to_dict(self) -> dict:
-        params = {"a": self.asset}
+        params: dict[str, Any] = {"a": self.asset}
 
         if self.since is not None:
             params["s"] = int(self.since.timestamp())
@@ -92,13 +93,13 @@ class Glassnode:
         category: str,
         metric: str,
         asset: str,
-        since: str | datetime = None,
-        until: str | datetime = None,
-        frequency_interval: str = None,
-        format: str = None,
-        currency: str = None,
-        exchange: str = None,
-        timestamp_format: str = None,
+        since: str | datetime | None = None,
+        until: str | datetime | None = None,
+        frequency_interval: str | None = None,
+        format: str | None = None,
+        currency: str | None = None,
+        exchange: str | None = None,
+        timestamp_format: str | None = None,
     ) -> dict:
         if isinstance(since, str):
             since = iso8601.parse_date(since)
